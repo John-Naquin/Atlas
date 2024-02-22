@@ -1,11 +1,20 @@
-'use client'
+'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 function ChatComponent() {
     const [userInput, setUserInput] = useState('');
     const [conversation, setConversation] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+    const endOfMessagesRef = useRef(null);
+
+    const scrollToBottom = () => {
+        endOfMessagesRef.current?.scrollIntoView({ behavior: 'smooth' });
+    };
+
+    useEffect(() => {
+        scrollToBottom();
+    }, [conversation]);
 
     const sendMessage = async () => {
         if (!userInput.trim()) return;
@@ -31,16 +40,17 @@ function ChatComponent() {
     };
 
     return (
-        <div className="flex flex-col w-full max-w-2xl mx-auto bg-gray-200 rounded-lg overflow-hidden">
-            <div className="flex-grow overflow-y-auto p-3">
+        <div className="flex flex-col h-screen p-4 bg-gray-200 rounded-lg overflow-hidden">
+            <div className="flex-grow overflow-y-auto mb-4 p-3">
                 {conversation.map((exchange, index) => (
-                    <div key={index} className={`max-w-sm mx-2 my-8 p-2 rounded-lg shadow ${
+                    <div key={index} className={`max-w-full mx-2 my-4 p-2 rounded-lg shadow ${
                         exchange.role === 'User' ? 'bg-blue-500 text-white ml-auto' : 'bg-gray-300 text-black mr-auto'
                     }`}>
                         <p className="text-xs font-bold">{exchange.role}</p>
                         <p>{exchange.text}</p>
                     </div>
                 ))}
+                <div ref={endOfMessagesRef} />
                 {isLoading && <div className="animate-bounce mr-auto ml-2 text-gray-500">Loading...</div>}
             </div>
             <div className="flex p-3 bg-white">
