@@ -40,38 +40,44 @@ function ChatComponent() {
     };
 
     return (
-        <div className="flex flex-col h-screen p-4 bg-gray-200 rounded-lg overflow-hidden">
-            <div className="flex-grow overflow-y-auto mb-4 p-3">
-                {conversation.map((exchange, index) => (
-                    <div key={index} className={`max-w-full mx-2 my-4 p-2 rounded-lg shadow ${
-                        exchange.role === 'User' ? 'bg-blue-500 text-white ml-auto' : 'bg-gray-300 text-black mr-auto'
-                    }`}>
-                        <p className="text-xs font-bold">{exchange.role}</p>
-                        <p>{exchange.text}</p>
-                    </div>
-                ))}
-                <div ref={endOfMessagesRef} />
-                {isLoading && <div className="animate-bounce mr-auto ml-2 text-gray-500">Loading...</div>}
+        <main className="flex min-h-screen flex-col items-center justify-between bg-black p-4 md:p-24">
+            <div className="flex flex-col w-full max-w-md mx-auto p-4 bg-white rounded-lg shadow-lg" style={{ height: '75vh' }}>
+                <div className="flex-grow overflow-y-auto p-3 space-y-4">
+                    {conversation.map((exchange, index) => (
+                        <div key={index} className={`w-full md:w-3/4 p-3 rounded-lg shadow ${
+                            exchange.role === 'User' ? 'bg-blue-500 text-white ml-auto' : 'bg-gray-100 text-black mr-auto'
+                        }`}>
+                            <p className="text-xs font-bold">{exchange.role}</p>
+                            <p>{exchange.text}</p>
+                        </div>
+                    ))}
+                    <div ref={endOfMessagesRef} />
+                    {isLoading && <div className="animate-bounce text-gray-500 self-center">Loading...</div>}
+                </div>
+                <div className="flex p-3 bg-gray-50 rounded-b-lg">
+                    <input 
+                        type="text"
+                        value={userInput}
+                        onChange={(e) => setUserInput(e.target.value)}
+                        onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
+                        className="flex-1 p-2 border-2 border-gray-300 rounded-full mr-2 text-black"
+                        placeholder="Type your message here..."
+                    />
+                    <button 
+                        onClick={sendMessage}
+                        className="px-4 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-600"
+                        disabled={isLoading}
+                    >
+                        Send
+                    </button>
+                </div>
             </div>
-            <div className="flex p-3 bg-white">
-                <input 
-                    type="text"
-                    value={userInput}
-                    onChange={(e) => setUserInput(e.target.value)}
-                    onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
-                    className="flex-1 p-2 border-2 border-gray-300 rounded mr-2 text-black"
-                    placeholder="Type your message here..."
-                />
-                <button 
-                    onClick={sendMessage}
-                    className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-                    disabled={isLoading}
-                >
-                    Send
-                </button>
-            </div>
-        </div>
+        </main>
     );
+    
+    
+    
 }
+
 
 export default ChatComponent;
