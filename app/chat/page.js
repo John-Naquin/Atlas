@@ -69,11 +69,11 @@ function ChatComponent() {
 
     return (
         <main className="flex min-h-screen flex-col items-center justify-between bg-black p-4 md:p-24">
-            <div className="flex justify-center mb-4">
-                <button onClick={() => switchBot('chat')} className={`px-4 py-2 m-1 ${currentBot === 'chat' ? 'bg-purple-600 text-white' : 'bg-gray-300 text-black'} rounded`}>Chat Bot</button>
-                <button onClick={() => switchBot('math')} className={`px-4 py-2 m-1 ${currentBot === 'math' ? 'bg-lime-600 text-white' : 'bg-gray-300 text-black'} rounded`}>Math Bot</button>
-                <button onClick={() => switchBot('writing')} className={`px-4 py-2 m-1 ${currentBot === 'writing' ? 'bg-orange-600 text-white' : 'bg-gray-300 text-black'} rounded`}>Writing Bot</button>
-            </div>
+        <div className="flex justify-center mb-4 space-x-2">
+            <button onClick={() => switchBot('chat')} className={`px-4 py-2 text-sm font-medium ${currentBot === 'chat' ? 'bg-purple-700 text-white' : 'bg-gray-700 text-gray-300'} rounded-lg shadow-md hover:bg-purple-600 hover:shadow-lg transition duration-300 ease-in-out`}>Chat Bot</button>
+            <button onClick={() => switchBot('math')} className={`px-4 py-2 text-sm font-medium ${currentBot === 'math' ? 'bg-green-700 text-white' : 'bg-gray-700 text-gray-300'} rounded-lg shadow-md hover:bg-green-600 hover:shadow-lg transition duration-300 ease-in-out`}>Math Bot</button>
+            <button onClick={() => switchBot('writing')} className={`px-4 py-2 text-sm font-medium ${currentBot === 'writing' ? 'bg-orange-700 text-white' : 'bg-gray-700 text-gray-300'} rounded-lg shadow-md hover:bg-orange-600 hover:shadow-lg transition duration-300 ease-in-out`}>Writing Bot</button>
+        </div>
             <div className="flex flex-col w-full max-w-md mx-auto p-4 bg-white rounded-lg shadow-lg" style={{ height: '75vh' }}>
                 <div className="flex-grow overflow-y-auto p-3 space-y-4">
                     {conversation.map((exchange, index) => (
