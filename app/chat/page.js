@@ -1,11 +1,11 @@
 'use client';
-
 import React, { useState, useEffect, useRef } from 'react';
 
 function ChatComponent() {
     const [userInput, setUserInput] = useState('');
     const [conversation, setConversation] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+    const [currentBot, setCurrentBot] = useState('chat');
     const endOfMessagesRef = useRef(null);
 
     const scrollToBottom = () => {
@@ -16,6 +16,11 @@ function ChatComponent() {
         scrollToBottom();
     }, [conversation]);
 
+    const switchBot = (botType) => {
+        setCurrentBot(botType);
+        setConversation([]);
+    };
+
     const sendMessage = async () => {
         if (!userInput.trim()) return;
 
@@ -23,7 +28,19 @@ function ChatComponent() {
         setConversation([...conversation, userMessage]);
         setIsLoading(true);
 
-        const botResponse = await fetch('https://atlas-backend-1eds.onrender.com/chat', {
+        let botUrl;
+        switch (currentBot) {
+            case 'math':
+                botUrl = 'https://atlas-backend-1eds.onrender.com/chatmath';
+                break;
+            case 'writing':
+                botUrl = 'https://atlas-backend-1eds.onrender.com/chatwriting';
+                break;
+            default:
+                botUrl = 'https://atlas-backend-1eds.onrender.com/chat';
+        }
+
+        const botResponse = await fetch(botUrl, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -39,13 +56,29 @@ function ChatComponent() {
         setUserInput('');
     };
 
+    const getBotMessageStyle = () => {
+        switch (currentBot) {
+            case 'math':
+                return 'bg-lime-500 text-white';
+            case 'writing':
+                return 'bg-orange-500 text-white';
+            default:
+                return 'bg-purple-500 text-white';
+        }
+    };
+
     return (
         <main className="flex min-h-screen flex-col items-center justify-between bg-black p-4 md:p-24">
+            <div className="flex justify-center mb-4">
+                <button onClick={() => switchBot('chat')} className={`px-4 py-2 m-1 ${currentBot === 'chat' ? 'bg-purple-600 text-white' : 'bg-gray-300 text-black'} rounded`}>Chat Bot</button>
+                <button onClick={() => switchBot('math')} className={`px-4 py-2 m-1 ${currentBot === 'math' ? 'bg-lime-600 text-white' : 'bg-gray-300 text-black'} rounded`}>Math Bot</button>
+                <button onClick={() => switchBot('writing')} className={`px-4 py-2 m-1 ${currentBot === 'writing' ? 'bg-orange-600 text-white' : 'bg-gray-300 text-black'} rounded`}>Writing Bot</button>
+            </div>
             <div className="flex flex-col w-full max-w-md mx-auto p-4 bg-white rounded-lg shadow-lg" style={{ height: '75vh' }}>
                 <div className="flex-grow overflow-y-auto p-3 space-y-4">
                     {conversation.map((exchange, index) => (
                         <div key={index} className={`w-full md:w-3/4 p-3 rounded-lg shadow ${
-                            exchange.role === 'User' ? 'bg-blue-500 text-white ml-auto' : 'bg-gray-100 text-black mr-auto'
+                            exchange.role === 'User' ? 'bg-gray-200 text-black ml-auto' : getBotMessageStyle() + ' mr-auto'
                         }`}>
                             <p className="text-xs font-bold">{exchange.role}</p>
                             <p>{exchange.text}</p>
@@ -74,10 +107,6 @@ function ChatComponent() {
             </div>
         </main>
     );
-    
-    
-    
 }
-
 
 export default ChatComponent;
