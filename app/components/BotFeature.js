@@ -18,9 +18,9 @@ const BotFeature = ({ title, description, image }) => (
 
 const BotsSection = () => {
   return (
-    <div className="bg-customBlack py-20 px-4">
+    <div className="bg-customGray py-20 px-4">
       <div className="mx-auto">
-        <h2 className="text-3xl font-bold text-customGray text-center mb-16">Unlock the Power of Atlas and Its Specialized Bots</h2>
+        <h2 className="text-3xl font-bold text-customBlack text-center mb-16">Unlock the Power of Atlas and Its Specialized Bots</h2>
         <div className="grid md:grid-cols-3 gap-8">
           <BotFeature
             image={Mathbot}

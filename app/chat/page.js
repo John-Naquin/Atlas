@@ -6,6 +6,7 @@ function ChatComponent() {
     const [conversation, setConversation] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [currentBot, setCurrentBot] = useState('chat');
+    const [selectedBotLabel, setSelectedBotLabel] = useState('Chat Bot'); 
     const endOfMessagesRef = useRef(null);
 
     const scrollToBottom = () => {
@@ -19,15 +20,25 @@ function ChatComponent() {
     const switchBot = (botType) => {
         setCurrentBot(botType);
         setConversation([]);
+        switch (botType) {
+            case 'math':
+                setSelectedBotLabel('Math Bot');
+                break;
+            case 'writing':
+                setSelectedBotLabel('Writing Bot');
+                break;
+            default:
+                setSelectedBotLabel('Chat Bot');
+        }
     };
 
     const sendMessage = async () => {
         if (!userInput.trim()) return;
-
-        const userMessage = { role: 'User', text: userInput };
-        setConversation([...conversation, userMessage]);
+    
         setIsLoading(true);
-
+    
+        const userMessage = { role: 'User', text: userInput };
+    
         let botUrl;
         switch (currentBot) {
             case 'math':
@@ -39,7 +50,7 @@ function ChatComponent() {
             default:
                 botUrl = 'https://atlas-backend-1eds.onrender.com/chat';
         }
-
+    
         const botResponse = await fetch(botUrl, {
             method: 'POST',
             headers: {
@@ -48,44 +59,47 @@ function ChatComponent() {
             body: JSON.stringify({ message: userInput }),
         });
         const data = await botResponse.json();
-
+    
         const botMessage = { role: 'Bot', text: data.response };
-        setConversation([...conversation, userMessage, botMessage]);
-        setIsLoading(false);
 
+        setConversation(prevConversation => [...prevConversation, userMessage, botMessage]);
+    
+        setIsLoading(false);
         setUserInput('');
     };
+    
 
     const getBotMessageStyle = () => {
         switch (currentBot) {
             case 'math':
-                return 'bg-lime-500 text-white';
+                return 'bg-customDarkBlue text-white';
             case 'writing':
-                return 'bg-orange-500 text-white';
+                return 'bg-customDarkBlue text-white';
             default:
-                return 'bg-purple-500 text-white';
+                return 'bg-customDarkBlue text-white';
         }
     };
 
     return (
-        <main className="flex min-h-screen flex-col items-center justify-between bg-black p-4 md:p-24">
-        <div className="flex justify-center mb-4 space-x-2">
-            <button onClick={() => switchBot('chat')} className={`px-4 py-2 text-sm font-medium ${currentBot === 'chat' ? 'bg-purple-700 text-white' : 'bg-gray-700 text-gray-300'} rounded-lg shadow-md hover:bg-purple-600 hover:shadow-lg transition duration-300 ease-in-out`}>Chat Bot</button>
-            <button onClick={() => switchBot('math')} className={`px-4 py-2 text-sm font-medium ${currentBot === 'math' ? 'bg-green-700 text-white' : 'bg-gray-700 text-gray-300'} rounded-lg shadow-md hover:bg-green-600 hover:shadow-lg transition duration-300 ease-in-out`}>Math Bot</button>
-            <button onClick={() => switchBot('writing')} className={`px-4 py-2 text-sm font-medium ${currentBot === 'writing' ? 'bg-orange-700 text-white' : 'bg-gray-700 text-gray-300'} rounded-lg shadow-md hover:bg-orange-600 hover:shadow-lg transition duration-300 ease-in-out`}>Writing Bot</button>
-        </div>
-            <div className="flex flex-col w-full max-w-md mx-auto p-4 bg-white rounded-lg shadow-lg" style={{ height: '75vh' }}>
+        <main className="flex min-h-screen flex-col items-center justify-between bg-customBlue p-4 pt-20 md:p-24">
+            <div className="text-white mb-4">Selected Bot: {selectedBotLabel}</div>
+            <div className="flex justify-center mb-4 space-x-2">
+                <button onClick={() => switchBot('chat')} className={`px-4 py-2 text-sm font-medium ${currentBot === 'chat' ? 'bg-customDarkBlue text-white' : 'bg-customGray text-customBlack'} rounded-lg shadow-md hover:bg-customBlack hover:text-customGray hover:shadow-lg transition duration-300 ease-in-out`}>Chat Bot</button>
+                <button onClick={() => switchBot('math')} className={`px-4 py-2 text-sm font-medium ${currentBot === 'math' ? 'bg-customDarkBlue text-white' : 'bg-customGray text-customBlack'} rounded-lg shadow-md hover:bg-customBlack hover:text-customGray hover:shadow-lg transition duration-300 ease-in-out`}>Math Bot</button>
+                <button onClick={() => switchBot('writing')} className={`px-4 py-2 text-sm font-medium ${currentBot === 'writing' ? 'bg-customDarkBlue text-white' : 'bg-customGray text-customBlack'} rounded-lg shadow-md hover:bg-customBlack hover:text-customGray hover:shadow-lg transition duration-300 ease-in-out`}>Writing Bot</button>
+            </div>
+            <div className="flex flex-col w-full max-w-md mx-auto p-4 bg-customGray rounded-lg shadow-lg" style={{ height: '75vh' }}>
                 <div className="flex-grow overflow-y-auto p-3 space-y-4">
                     {conversation.map((exchange, index) => (
                         <div key={index} className={`w-full md:w-3/4 p-3 rounded-lg shadow ${
-                            exchange.role === 'User' ? 'bg-gray-200 text-black ml-auto' : getBotMessageStyle() + ' mr-auto'
+                            exchange.role === 'User' ? 'bg-gray-200 text-customBlack ml-auto' : getBotMessageStyle() + ' mr-auto'
                         }`}>
                             <p className="text-xs font-bold">{exchange.role}</p>
                             <p>{exchange.text}</p>
                         </div>
                     ))}
                     <div ref={endOfMessagesRef} />
-                    {isLoading && <div className="animate-bounce text-gray-500 self-center">Loading...</div>}
+                    {isLoading && <div className="animate-bounce text-customBlack self-center">Loading...</div>}
                 </div>
                 <div className="flex p-3 bg-gray-50 rounded-b-lg">
                     <input 
@@ -93,12 +107,12 @@ function ChatComponent() {
                         value={userInput}
                         onChange={(e) => setUserInput(e.target.value)}
                         onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
-                        className="flex-1 p-2 border-2 border-gray-300 rounded-full mr-2 text-black"
+                        className="flex-1 p-2 border-2 border-customBlack rounded-full mr-2 text-customBlack"
                         placeholder="Type your message here..."
                     />
                     <button 
                         onClick={sendMessage}
-                        className="px-4 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-600"
+                        className="px-4 py-2 bg-customBlue text-white rounded-full hover:bg-blue-600"
                         disabled={isLoading}
                     >
                         Send

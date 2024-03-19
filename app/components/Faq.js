@@ -20,9 +20,9 @@ const FAQItem = ({ question, answer }) => {
 const FAQPage = () => {
     return (
         <main className="min-h-screen w-full flex">
-            <div className="w-full md:w-1/2 bg-customGray p-4 md:p-8 flex flex-col justify-center">
-                <h1 className="text-3xl font-bold text-customBlack mb-2">Frequently Asked Questions</h1>
-                <p className="text-customBlack mb-4">Find answers to common questions about the Atlas project and its bots.</p>
+            <div className="w-full md:w-1/2 bg-customBlack p-4 md:p-8 flex flex-col justify-center">
+                <h1 className="text-3xl font-bold text-customGray mb-2">Frequently Asked Questions</h1>
+                <p className="text-customGray mb-4">Find answers to common questions about the Atlas project and its bots.</p>
             </div>
             <div className="w-full md:w-1/2 bg-customBlue p-4 md:p-8 text-customBlack text-xl">
                 <FAQItem question="What is Atlas?" answer="Atlas is an AI-driven chatbot platform. There are several specialized bots available to use." />
