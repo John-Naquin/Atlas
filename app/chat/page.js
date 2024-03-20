@@ -81,7 +81,7 @@ function ChatComponent() {
     };
 
     return (
-        <main className="flex min-h-screen flex-col items-center justify-between bg-customBlue p-4 pt-20 md:p-24">
+        <main className="flex min-h-screen flex-col items-center justify-between bg-customBlack p-4 pt-20 md:p-24">
             <div className="text-white mb-4">Selected Bot: {selectedBotLabel}</div>
             <div className="flex justify-center mb-4 space-x-2">
                 <button onClick={() => switchBot('chat')} className={`px-4 py-2 text-sm font-medium ${currentBot === 'chat' ? 'bg-customDarkBlue text-white' : 'bg-customGray text-customBlack'} rounded-lg shadow-md hover:bg-customBlack hover:text-customGray hover:shadow-lg transition duration-300 ease-in-out`}>Chat Bot</button>
@@ -112,7 +112,7 @@ function ChatComponent() {
                     />
                     <button 
                         onClick={sendMessage}
-                        className="px-4 py-2 bg-customBlue text-white rounded-full hover:bg-blue-600"
+                        className="px-4 py-2 bg-customDarkBlue text-white rounded-full hover:bg-blue-600"
                         disabled={isLoading}
                     >
                         Send

@@ -8,8 +8,8 @@ const config: Config = {
   ],
   theme: {
     colors: {
-      customBlue: '#068FFF', 
-      customDarkBlue: '#4E4FEB', 
+      customBlue: '#9978CF', 
+      customDarkBlue: '#426B7F', 
       customGray: '#EEEEEE', 
       customBlack: '#000000'
     },
