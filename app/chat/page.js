@@ -81,8 +81,8 @@ function ChatComponent() {
     };
 
     return (
-        <main className="flex min-h-screen flex-col items-center justify-between bg-customBlack p-4 pt-20 md:p-24">
-            <div className="text-white mb-4">Selected Bot: {selectedBotLabel}</div>
+        <main className="flex min-h-screen flex-col items-center justify-between bg-custom-linear-gradient p-4 pt-20 md:p-24">
+            <div className="text-customGray font-bold mb-4">Selected Bot: {selectedBotLabel}</div>
             <div className="flex justify-center mb-4 space-x-2">
                 <button onClick={() => switchBot('chat')} className={`px-4 py-2 text-sm font-medium ${currentBot === 'chat' ? 'bg-customDarkBlue text-white' : 'bg-customGray text-customBlack'} rounded-lg shadow-md hover:bg-customBlack hover:text-customGray hover:shadow-lg transition duration-300 ease-in-out`}>Chat Bot</button>
                 <button onClick={() => switchBot('math')} className={`px-4 py-2 text-sm font-medium ${currentBot === 'math' ? 'bg-customDarkBlue text-white' : 'bg-customGray text-customBlack'} rounded-lg shadow-md hover:bg-customBlack hover:text-customGray hover:shadow-lg transition duration-300 ease-in-out`}>Math Bot</button>

@@ -2,7 +2,7 @@ import React from 'react';
 
 function About() {
     return (
-        <main className="bg-customDarkBlue text-customBlack min-h-screen flex flex-col items-center justify-center p-4 md:p-24">
+        <main className="bg-custom-linear-gradient text-customBlack min-h-screen flex flex-col items-center justify-center p-4 md:p-24">
             <h1 className="text-2xl md:text-4xl font-bold mb-4 md:mb-8 text-center">Meet the Creator of Atlas</h1>
             <div className="flex flex-col md:flex-row items-center justify-center w-full max-w-6xl">
                 <div className="w-full md:w-60 h-60 rounded-lg shadow-lg mb-4 md:mb-0 md:mr-4">
