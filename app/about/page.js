@@ -15,7 +15,7 @@ function About() {
                            className="text-customGray text-xl cursor-pointer bg-transparent border-2 border-customGray py-2 px-4 md:px-8 rounded text-center hover:bg-customBlack hover:text-customGray hover:border-customBlack transition duration-300 ease-in-out">
                             LinkedIn
                         </a>
-                        <a href="https://github.com/Rookie1829" target="_blank" rel="noopener noreferrer"
+                        <a href="https://github.com/John-Naquin" target="_blank" rel="noopener noreferrer"
                            className="text-customGray text-xl cursor-pointer bg-transparent border-2 border-customGray py-2 px-4 md:px-8 rounded text-center hover:bg-customBlack hover:text-customGray hover:border-customBlack transition duration-300 ease-in-out">
                             GitHub
                         </a>
