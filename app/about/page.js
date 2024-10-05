@@ -11,7 +11,7 @@ function About() {
                 <div className="text-sm md:text-base max-w-md md:ml-4">
                     <p className="mb-4 md:mb-6">Hello, I am the creator behind the Atlas project. With years of experience in chatbot development and a passion for creating innovative solutions, I have designed Atlas to be a versatile platform that offers specialized tools for math, chatting, and writing. Stay tuned for future additions to the Atlas family.</p>
                     <div className="flex flex-col md:flex-row gap-2 md:gap-4">
-                        <a href="https://www.linkedin.com/in/john-naquin/" target="_blank" rel="noopener noreferrer"
+                        <a href="www.linkedin.com/in/john-naquin" target="_blank" rel="noopener noreferrer"
                            className="text-customGray text-xl cursor-pointer bg-transparent border-2 border-customGray py-2 px-4 md:px-8 rounded text-center hover:bg-customBlack hover:text-customGray hover:border-customBlack transition duration-300 ease-in-out">
                             LinkedIn
                         </a>
@@ -19,7 +19,7 @@ function About() {
                            className="text-customGray text-xl cursor-pointer bg-transparent border-2 border-customGray py-2 px-4 md:px-8 rounded text-center hover:bg-customBlack hover:text-customGray hover:border-customBlack transition duration-300 ease-in-out">
                             GitHub
                         </a>
-                        <a href="https://onedrive.live.com/?authkey=%21AHUoACmzIzQUuc0&cid=24BCD1F502D345BE&id=24BCD1F502D345BE%2110484&parId=24BCD1F502D345BE%2110393&o=OneUp" target="_blank" rel="noopener noreferrer"
+                        <a href="https://1drv.ms/b/c/24bcd1f502d345be/EXIzWIlpGlVNjIQ8brRrG6sBCKp4NAay7nWbrg45Bn8Baw?e=xl5IG0" target="_blank" rel="noopener noreferrer"
                            className="text-customGray text-xl cursor-pointer bg-transparent border-2 border-customGray py-2 px-4 md:px-8 rounded text-center hover:bg-customBlack hover:text-customGray hover:border-customBlack transition duration-300 ease-in-out">
                             Resume
                         </a>
